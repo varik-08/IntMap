@@ -1,0 +1,10 @@
+{
+    "name": "varik/int-map",
+    "authors": [
+        {
+            "name": "Volkov Yaroslav",
+            "email": "varik-08@mail.ru"
+        }
+    ],
+    "require": {}
+}
