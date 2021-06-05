@@ -30,4 +30,5 @@ echo "\n-----------------\n";
 echo $intMapObj->get(2);
 echo "\n-----------------\n";
 
+shmop_delete($shmId);
 shmop_close($shmId);
