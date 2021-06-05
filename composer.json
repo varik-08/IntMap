@@ -6,5 +6,10 @@
             "email": "varik-08@mail.ru"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "IntMap\\": "app/"
+        }
+    },
     "require": {}
 }
