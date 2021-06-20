@@ -4,31 +4,28 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use IntMap\Classes\IntMap;
 
-$shmId = shmop_open(1, "c", 0644, 10000000);
+$shmId = shmop_open(1, "c", 0644, 100000000);
 
 $intMapObj = new IntMap($shmId);
 
-$oldValue = $intMapObj->put(1, 100);
-echo 'old: ' . $oldValue . ' new: ' . $intMapObj->get(1);
-echo "\n-----------------\n";
+$count = 50000;
 
-$oldValue = $intMapObj->put(1, 200);
-echo 'old: ' . $oldValue . ' new: ' . $intMapObj->get(1);
-echo "\n-----------------\n";
+for ($i = 0; $i < $count; $i++) {
+    $intMapObj->put($i, $i * 100 + 1);
+}
 
-$delKey = $intMapObj->del(1);
-echo 'del: ' . $delKey;
-echo "\n-----------------\n";
+for ($i = $count / 2; $i < $count; $i++) {
+    $intMapObj->del($i);
+}
 
-$delKey = $intMapObj->del(1);
-echo 'del: ' . $delKey;
-echo "\n-----------------\n";
+for ($i = 0; $i < $count / 2; $i++) {
+    $intMapObj->put($i, $i * 100 + 2);
+}
 
-echo $intMapObj->get(1);
-echo "\n-----------------\n";
-
-echo $intMapObj->get(2);
-echo "\n-----------------\n";
+for ($i = 0; $i < $count; $i++) {
+    echo $i . ': ' . $intMapObj->get($i);
+    echo "\n-----------------\n";
+}
 
 shmop_delete($shmId);
 shmop_close($shmId);

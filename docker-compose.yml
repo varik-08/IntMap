@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: php
+    volumes:
+      - ./:/script
+    command: bash -c "php /script/app/index.php"
