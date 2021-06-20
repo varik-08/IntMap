@@ -29,21 +29,21 @@ class IntMap implements IntMapInterface
      *
      * @var
      */
-    const CONF_SIZE = 30;
+    const CONF_SIZE = 33;
 
     /**
      * Зарезервированный размер для значений ключа, значения, ссылки
      *
      * @var
      */
-    const VALUE_SIZE = 10;
+    const VALUE_SIZE = 11;
 
     /**
      * Размер блока пары ключ-значения
      *
      * @var
      */
-    const PAIR_BLOCK_SIZE = 30;
+    const PAIR_BLOCK_SIZE = 33;
 
     /**
      * Начальный размер массива
@@ -77,7 +77,7 @@ class IntMap implements IntMapInterface
     {
         // создаем память при инициализации
         if (isset($capacity)) {
-            $threshold = $capacity * IntMap::LOAD_FACTOR;
+            $threshold = (int)($capacity * IntMap::LOAD_FACTOR);
             $size      = 0;
 
             // создаем таблицу с начальной конфигурацией
@@ -92,7 +92,7 @@ class IntMap implements IntMapInterface
 
         // задаем новый размер и порог
         $newCapacity  = $oldCapacity * IntMap::COEFFICIENT_INCREASE;
-        $newThreshold = $newCapacity * IntMap::LOAD_FACTOR;
+        $newThreshold = (int)($newCapacity * IntMap::LOAD_FACTOR);
 
         // трансформируем таблицу с новой конфигурацией
         $this->transfer($oldCapacity, $newCapacity, $newThreshold, $size);
